@@ -1,10 +1,25 @@
+import io.github.fvarrui.javapackager.gradle.PackageTask
+import io.github.fvarrui.javapackager.model.WindowsConfig
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.github.fvarrui:javapackager:1.7.6'
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
 }
 
+apply plugin: 'io.github.fvarrui.javapackager.plugin'
+
 group = 'egorovna'
+version = '1.0'
 
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile).configureEach {
@@ -41,4 +56,19 @@ tasks.named('test') {
 
 jar {
     enabled = false
+}
+
+tasks.register('createInstallers', PackageTask) {
+    dependsOn build
+    outputDirectory = layout.buildDirectory.file('installers').get().asFile
+    bundleJre = true
+    customizedJre = false
+    mainClass = 'egorovna.fxspring.FxSpringApplication'
+    winConfig(({
+        generateMsi = false
+        generateMsm = false
+        setupLanguages = ['russian': 'compiler:Languages\\Russian.isl']
+        disableDirPage = false
+        removeOldLibs = true
+    } as Closure<WindowsConfig>))
 }
