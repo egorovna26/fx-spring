@@ -30,3 +30,15 @@ jobs:
           ./gradlew -version
           ./gradlew clean
           ./gradlew build
+      - name: Upload builds to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          body: |
+            - Last build date: `${{steps.vars.outputs.date_now}}`
+            - Reference commit: ${{github.sha}}
+          name: Development build
+          prerelease: true
+          removeArtifacts: true
+          tag: dev-build
