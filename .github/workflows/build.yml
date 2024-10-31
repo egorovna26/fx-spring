@@ -34,12 +34,14 @@ jobs:
         id: vars
         run: |
           echo "date_now=$(date +"%Y-%m-%d %T")" >> "${GITHUB_OUTPUT}"
+          cd build/libs/installers
+          ls -l
       - name: Upload builds to Releases
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: build/libs/*.jar
+          artifacts: build/libs/installers/*.jar
           body: |
             **This is an automatically generated in-development pre-release version of the application, that includes the latest master branch changes.**
             **⚠️ This build is not stable and may end up terminating with a fatal error. ⚠️**
