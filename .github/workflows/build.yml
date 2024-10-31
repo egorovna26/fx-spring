@@ -48,6 +48,5 @@ jobs:
             - Last build date: `${{steps.vars.outputs.date_now}}`
             - Reference commit: ${{github.sha}}
           name: Development build
-          prerelease: true
           removeArtifacts: true
           tag: dev-build
