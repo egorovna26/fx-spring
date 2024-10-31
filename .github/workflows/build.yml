@@ -28,3 +28,5 @@ jobs:
           java -version
           chmod +x ./gradlew
           ./gradlew -version
+          ./gradlew clean
+          ./gradlew build
