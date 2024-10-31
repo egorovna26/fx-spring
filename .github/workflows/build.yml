@@ -30,6 +30,10 @@ jobs:
           ./gradlew -version
           ./gradlew clean
           ./gradlew build
+      - name: Set up variables
+        id: vars
+        run: |
+          echo "date_now=$(date --rfc-3339=seconds)" >> "${GITHUB_OUTPUT}"
       - name: Upload builds to Releases
         uses: ncipollo/release-action@v1
         with:
