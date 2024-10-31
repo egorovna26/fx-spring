@@ -5,7 +5,11 @@ plugins {
 }
 
 group = 'egorovna'
-version = '0.0.1-SNAPSHOT'
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
 
 java {
     toolchain {
