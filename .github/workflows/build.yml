@@ -71,13 +71,13 @@ jobs:
       - name: Build with Gradle
         run: |
           java -version
-          gradlew.bat -version
-          gradlew.bat clean
-          gradlew.bat createInstallers
-      - name: Set up variables
-        id: vars
-        run: |
-          echo "date_now=$(date +"%Y-%m-%d %T")" >> "${GITHUB_OUTPUT}"
+          cmd /c "gradlew.bat -version"
+          cmd /c "gradlew.bat clean"
+          cmd /c "gradlew.bat createInstallers"
+#      - name: Set up variables
+#        id: vars
+#        run: |
+#          echo "date_now=$(date +"%Y-%m-%d %T")" >> "${GITHUB_OUTPUT}"
       - name: Upload builds to Releases
         uses: ncipollo/release-action@v1
         with:
